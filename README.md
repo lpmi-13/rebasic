@@ -13,7 +13,7 @@ node (hopefully platform agnostic).
 * `surgical` - use `rebase --onto` to get rid of two consecutive
 commits within the same large commit
 
-## Input
+## Task - clean up some commit messages before opening a PR
 
 [read the documentation here](https://git-scm.com/docs/git-rebase)
 

@@ -1,17 +1,4 @@
-# GIT MICROMATERIAL FOR REBASING
-
-Rebasing is scary for people. We need to practice it to feel 
-less scared. Practicing with immediate actionable feedback 
-could help this process. Here's me trying to do that with 
-node (hopefully platform agnostic).
-
-## different branches for different learning outcomes (TBC)
-
-* `master` - just fixup two dirt commits, no conflicts
-* `conflict` - reorder two commits and resolve the conflict
-* `undo` - use `rebase --onto` to undo an overly ambitious rebase
-* `surgical` - use `rebase --onto` to get rid of two consecutive
-commits within the same large commit
+(first, run `npm install` to set up the exercise) 
 
 ## Task - clean up some commit messages before opening a PR
 
@@ -22,18 +9,21 @@ to work with. Often, lots of commits happen during working
 on a project, but we don't necessarily need all the commit 
 messages once we're finished with the work.
 
-As an example, if there are three commits that we end up doing 
+As an example, if there are five commits that we end up doing 
 for a new feature, and they look something like this after
 running `git log --oneline`:
 
 ```
-7fhr64h add new feature
-8v8gjfu does this work?
-8jfyf7d initial commit
+5819476 finish feature
+b2a576f still a work in progress - **remove this message**
+0ff0742 this is a test - **remove this message**
+360c7a1 update readme
+6a2f9f8 initial commit
 ```
 
-we don't necessarily care about the first two commit messages, 
-though we probably DO care about the first two commits (we 
+we don't necessarily care about the middle two commit messages,
+since they don't tell us very much about what was changed, 
+though we probably DO care about the those two commits (we 
 want to keep the code, especially if the feature is built on
 it, instead of being entirely contained in the final commit).
 
@@ -47,14 +37,15 @@ of the project to be nice and clean.
 so to start, we can very easily trigger an interactive rebase
 like so:
 
-`git rebase -i HEAD~3`
+`git rebase -i HEAD~4`
 
 this will result in something that looks like
 
 ```
-pick 7fhr64h add new feature
-pick 8v8gjfu does this work?
-pick 8jfyf7d initial commit
+pick 360c7a1 update readme
+pick 0ff0742 this is a test - **remove this message**
+pick b2a576f still a work in progress - **remove this message**
+pick 5819476 finish feature 
 
 # Rebase 727710e..34ea71e onto 727710e (3 commands)
 #
@@ -90,10 +81,6 @@ the command that we're probably interested in is this one:
 # f, fixup <commit> = like "squash", but discard this commit's log message
 ```
 
-this basically means that we're going to turn our three commits 
-into one commit, and that one commit will just have the one 
-message.
-
 We're using `fixup` instead of `squash` because we don't care about the messages, they don't tell us anything useful here. If you
 really want to, you can use `squash` instead, the effect on the
 code is the same (all put together into one commit).
@@ -102,9 +89,10 @@ So in the interactive rebase prompt, we can update the lines
 to the following:
 
 ```
-pick 7fhr64h add new feature
-fixup 8v8gjfu does this work?
-fixup 8jfyf7d initial commit
+pick 360c7a1 update readme
+fixup 0ff0742 this is a test - **remove this message**
+fixup b2a576f still a work in progress - **remove this message**
+pick 5819476 finish feature
 ```
 (it's possible to use `fixup` or just `f` here)
 

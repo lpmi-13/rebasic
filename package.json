@@ -1,5 +1,5 @@
 {
-  "name": "gitorial",
+  "name": "rebasic",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,7 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "gity": "^1.0.5",
-    "sync-loop": "^0.1.1"
-  },
   "dependencies": {
-    "gitlog": "^3.1.2",
-    "simple-git": "^1.104.0"
+    "gitlog": "^3.1.2"
   }
 }

@@ -1,5 +1,0 @@
-This is an example file.
-
-It doesn't have any code.
-
-This is a very much beta version.
